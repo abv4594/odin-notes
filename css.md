@@ -1,5 +1,82 @@
 # CSS
 
+## Cascade
+
+The priority: **ID Selector > Class Selector > Type selectors** which is known 
+
+Now in many situations it's a bit more complex. So there are some additional rules:
+### If an element is targeted by same priorities, wins the one with more selections. Examples:
+```html
+<div class="main">
+    <div class="list subsection">Red text</div>
+</div>
+```
+
+```css
+/*rule 1*/
+.subsection {
+    color: blue
+}
+
+/*rule 2*/
+.main .list {
+    color: red
+}
+```
+*In the above example, rule 2 wins because it targets the element more times.*
+
+However, if **rule 1** were an id definition like:
+```css
+#subsection {
+    color: blue
+}
+```
+Then it would win.
+
+### The operators ```* , >, (space)``` don't add to the specificity (specificity = 0)
+
+```css
+* {
+    color: red
+}
+
+h1 {
+    color: blue
+}
+
+.title {
+    color: green
+}
+```
+
+``` html
+<h1 class="title"> Title </h1>
+```
+
+In the html above the title would appear green. 
+
+### Inheritance
+
+Typography-based properties are usually inherited. The inheritance loses when the element is directly targeted. No matter if the parent has a higher specificity. Example:
+
+``` css
+#parent {
+    color: blue
+}
+
+.child {
+    color: red
+}
+```
+
+```html
+<div id="parent">
+    <div class="child"> Text </div>
+</div>   
+```
+
+In the code above, Text would appear **red**
+
 ## Inner and Outer Display Types
 
 Until I read about this, it was a bit confusing for me as some properties would affect the boxes outside whereas other properties would affect the elements inside the boxes.
